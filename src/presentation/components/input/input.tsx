@@ -18,18 +18,21 @@ const Input: React.FC<Props> = (props: Props) => {
     })
   }
 
-  /*   const getStatus = (): void => {
-
-  } */
+  const getStatus = (): boolean => {
+    return !!error
+  }
 
   const getTitle = (): string => {
-    return error
+    return error || 'Tudo certo!'
   }
 
   return (
     <div className={Styles.inputWrap}>
       <input {...props} data-testid={props.name} readOnly onFocus={enableInput} onChange={handleChange} />
-      <span data-testid={`${props.name}-status`} title={getTitle()} className={Styles.status}></span>
+      {getStatus()
+        ? (<span data-testid={`${props.name}-status`} title={getTitle()} className={Styles.statusError}></span>)
+        : (<span data-testid={`${props.name}-status`} title={getTitle()} className={Styles.statusSuccess}></span>)}
+
     </div>
   )
 }
