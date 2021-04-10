@@ -12,8 +12,8 @@ const Input: React.FC<Props> = (props: Props) => {
     event.target.readOnly = false
   }
 
-  const getStatus = (): string => {
-    return 'Erro'
+  const getStatus = (): void => {
+
   }
 
   const getTitle = (): string => {
@@ -23,7 +23,7 @@ const Input: React.FC<Props> = (props: Props) => {
   return (
     <div className={Styles.inputWrap}>
       <input {...props} readOnly onFocus={enableInput} />
-      <span data-testid={`${props.name}-status`} title={getTitle()} className={Styles.status}>{getStatus()}</span>
+      <span data-testid={`${props.name}-status`} title={getTitle()} className={Styles.status}></span>
     </div>
   )
 }
