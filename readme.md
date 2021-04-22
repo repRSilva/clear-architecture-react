@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/repRSilva/clear-architecture-react.svg?branch=main)](https://travis-ci.org/repRSilva/clear-architecture-react)
