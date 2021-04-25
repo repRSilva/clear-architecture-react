@@ -3,7 +3,6 @@ import Context from '@/presentation/contexts/form/form-context'
 import Styles from './signup-styles.scss'
 import { Header, Input, FormStatus, Footer } from '@/presentation/components'
 import { Validation } from '@/presentation/protocols/validation'
-import { stat } from 'node:fs'
 
 type Props = {
   validation: Validation
@@ -14,10 +13,11 @@ const SignUp: React.FC<Props> = ({ validation }: Props) => {
     name: '',
     email: '',
     password: '',
+    passwordConfirmation: '',
     nameError: '',
     emailError: '',
     passwordError: '',
-    passwordConfirmationError: 'Campo obrigatório',
+    passwordConfirmationError: '',
     mainError: ''
   })
 
@@ -26,9 +26,10 @@ const SignUp: React.FC<Props> = ({ validation }: Props) => {
       ...state,
       nameError: validation.validate('name', state.name),
       emailError: validation.validate('email', state.email),
-      passwordError: validation.validate('password', state.password)
+      passwordError: validation.validate('password', state.password),
+      passwordConfirmationError: validation.validate('passwordConfirmation', state.passwordConfirmation)
     })
-  }, [state.name, state.email, state.password])
+  }, [state.name, state.email, state.password, state.passwordConfirmation])
 
   return (
     <div className={Styles.signup}>
