@@ -159,7 +159,7 @@ describe('SignUp Component', () => {
     expect(addAccountSpy.callsCount).toBe(0)
   })
 
-  test('Should present error if Authentication fails', async () => {
+  test('Should present error if AddAccount fails', async () => {
     const { sut, addAccountSpy } = makeSut()
     const error = new EmailInUseError()
     jest.spyOn(addAccountSpy, 'add').mockRejectedValueOnce(error)
@@ -183,5 +183,13 @@ describe('SignUp Component', () => {
     await simulateValidSubmit(sut)
     Helper.testElementText(sut, 'main-error', error.message)
     Helper.testChildCount(sut, 'error-wrap', 1)
+  })
+
+  test('Should go to signup page', async () => {
+    const { sut } = makeSut()
+    const loginLink = sut.getByTestId('login-link')
+    fireEvent.click(loginLink)
+    expect(history.length).toBe(1)
+    expect(history.location.pathname).toBe('/login')
   })
 })
