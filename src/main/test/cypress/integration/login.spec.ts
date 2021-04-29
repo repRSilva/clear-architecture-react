@@ -3,4 +3,3 @@ describe('Login', () => {
     cy.visit('login')
   })
 })
-
