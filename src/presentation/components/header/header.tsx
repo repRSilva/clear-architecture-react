@@ -7,7 +7,7 @@ import { useHistory } from 'react-router'
 
 const Header: React.FC = () => {
   const history = useHistory()
-  const { setCurrentAccount } = useContext(ApiContext)
+  const { setCurrentAccount, getCurrentAccount } = useContext(ApiContext)
   const logOut = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
     event.preventDefault()
     setCurrentAccount(undefined)
@@ -19,7 +19,7 @@ const Header: React.FC = () => {
       <div className={Styles.headerContent}>
         <Logo />
         <div className={Styles.logoutWrap}>
-          <span>Rafael</span>
+          <span data-testid="username">{getCurrentAccount().name}</span>
           <a data-testid="logout" href="#" onClick={logOut}>Sair</a>
         </div>
       </div>
