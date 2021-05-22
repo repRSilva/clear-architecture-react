@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useHistory } from 'react-router'
+import { useHistory, Link } from 'react-router-dom'
 import { FormContext, ApiContext } from '@/presentation/contexts'
 import Styles from './signup-styles.scss'
 import { LoginHeader, Input, FormStatus, Footer, SubmitButton } from '@/presentation/components'
 import { Validation } from '@/presentation/protocols/validation'
 import { AddAccount } from '@/domain/usecases'
-import { Link } from 'react-router-dom'
 
 type Props = {
   validation: Validation
