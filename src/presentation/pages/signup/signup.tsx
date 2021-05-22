@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useHistory } from 'react-router'
+import { useHistory, Link } from 'react-router-dom'
 import { FormContext, ApiContext } from '@/presentation/contexts'
 import Styles from './signup-styles.scss'
 import { LoginHeader, Input, FormStatus, Footer, SubmitButton } from '@/presentation/components'
 import { Validation } from '@/presentation/protocols/validation'
 import { AddAccount } from '@/domain/usecases'
-import { Link } from 'react-router-dom'
 
 type Props = {
   validation: Validation
@@ -28,23 +27,17 @@ const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
     mainError: ''
   })
 
-  useEffect(() => {
+  useEffect(() => { validate('name') }, [state.name])
+  useEffect(() => { validate('email') }, [state.email])
+  useEffect(() => { validate('password') }, [state.password])
+  useEffect(() => { validate('passwordConfirmation') }, [state.passwordConfirmation])
+
+  const validate = (field: string): void => {
     const { name, email, password, passwordConfirmation } = state
     const formData = { name, email, password, passwordConfirmation }
-    const nameError = validation.validate('name', formData)
-    const emailError = validation.validate('email', formData)
-    const passwordError = validation.validate('password', formData)
-    const passwordConfirmationError = validation.validate('passwordConfirmation', formData)
-
-    setState({
-      ...state,
-      nameError,
-      emailError,
-      passwordError,
-      passwordConfirmationError,
-      isFormInvalid: !!nameError || !!emailError || !!passwordError || !!passwordConfirmationError
-    })
-  }, [state.name, state.email, state.password, state.passwordConfirmation])
+    setState(old => ({ ...old, [`${field}Error`]: validation.validate(field, formData) }))
+    setState(old => ({ ...old, isFormInvalid: !!old.nameError || !!old.emailError || !!old.passwordError || !!old.passwordConfirmationError }))
+  }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()

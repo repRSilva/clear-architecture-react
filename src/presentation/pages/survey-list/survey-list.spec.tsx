@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router } from 'react-router'
+import { Router } from 'react-router-dom'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { SurveyList } from '@/presentation/pages'
 import { AccessDeniedError, UnexpectedError } from '@/domain/errors'
