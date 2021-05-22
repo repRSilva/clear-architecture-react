@@ -83,7 +83,6 @@ describe('Login', () => {
   it('Should not call submit if form is invalid', () => {
     mockSuccess()
     cy.getByTestId('email').focus().type(faker.internet.email()).type('{enter}')
-    cy.wait('@request')
     Helper.testHttpCallsCount(0)
   })
 })
