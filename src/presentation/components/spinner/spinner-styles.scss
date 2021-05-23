@@ -6,6 +6,14 @@
   width: 80px;
   height: 80px;
 
+  &.negative{
+    div {
+      &:after{
+        background: $white;
+      }
+    }
+  }
+
   div {
     transform-origin: 40px 40px;
     animation: lds-spinner 1.2s linear infinite;
