@@ -7,7 +7,7 @@ const Loading: React.FC = () => {
     <div className={Styles.loadingWrap}>
       <div className={Styles.loading}>
         <span>Aguarde...</span>
-        <Spinner isnegative />
+        <Spinner isNegative />
       </div>
     </div>
   )
