@@ -29,7 +29,6 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult }: Props) => {
   return (
     <div className={Styles.surveyResultWrap}>
       <Header />
-
       <div data-testid="survey-result" className={Styles.contentWrap}>
         {state.surveyResult &&
           <>
@@ -38,7 +37,6 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult }: Props) => {
               <h2 data-testid="question">{state.surveyResult.question}</h2>
             </hgroup>
             <FlipMove data-testid="answers" className={Styles.answersList}>
-
               {state.surveyResult.answers.map(answer =>
                 <li data-testid="answer-wrap" key={answer.answer} className={answer.isCurrentAccountAnswer ? Styles.active : ''}>
                   {answer.image && <img data-testid="image" src={answer.image} alt={answer.answer} />}
@@ -46,7 +44,6 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult }: Props) => {
                   <span data-testid="percent" className={Styles.percent}>{`${answer.percent}%`}</span>
                 </li>
               )}
-
             </FlipMove>
             <button>Voltar</button>
           </>
