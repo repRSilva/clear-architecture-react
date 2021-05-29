@@ -7,6 +7,7 @@ import { AccessDeniedError, UnexpectedError } from '@/domain/errors'
 import { AccountModel } from '@/domain/models'
 import { MemoryHistory, createMemoryHistory } from 'history'
 import { Router } from 'react-router-dom'
+import { RecoilRoot } from 'recoil'
 
 type SutTypes = {
   loadSurveyResultSpy: LoadSurveyResultSpy
@@ -24,11 +25,13 @@ const makeSut = ({ loadSurveyResultSpy = new LoadSurveyResultSpy(), saveSurveyRe
   const history = createMemoryHistory({ initialEntries: ['/', '/surveys/any_id'], initialIndex: 1 })
   const setCurrentAccountMock = jest.fn()
   render(
-    <ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => mockAccountModel() }}>
-      <Router history={history}>
-        <SurveyResult loadSurveyResult={loadSurveyResultSpy} saveSurveyResult={saveSurveyResultSpy} />
-      </Router>
-    </ApiContext.Provider>
+    <RecoilRoot>
+      <ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => mockAccountModel() }}>
+        <Router history={history}>
+          <SurveyResult loadSurveyResult={loadSurveyResultSpy} saveSurveyResult={saveSurveyResultSpy} />
+        </Router>
+      </ApiContext.Provider>
+    </RecoilRoot>
   )
 
   return {
@@ -205,6 +208,7 @@ describe('SurveyResult Component', () => {
     await waitFor(() => screen.getByTestId('survey-result'))
     const answerWrap = screen.queryAllByTestId('answer-wrap')
     fireEvent.click(answerWrap[1])
+    await waitFor(() => screen.getByTestId('survey-result'))
     fireEvent.click(answerWrap[1])
     await waitFor(() => screen.getByTestId('survey-result'))
     expect(saveSurveyResultSpy.callsCount).toBe(1)
