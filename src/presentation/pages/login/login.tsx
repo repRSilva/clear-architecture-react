@@ -5,7 +5,7 @@ import { Authentication } from '@/domain/usecases'
 import { LoginHeader, Footer, CurrentAccountState } from '@/presentation/components'
 import { Validation } from '@/presentation/protocols/validation'
 import { LoginState, Input, SubmitButton, FormStatus } from '@/presentation/pages/login/components'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
 
 type Props = {
   validation: Validation
@@ -13,12 +13,14 @@ type Props = {
 }
 
 const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
+  const resetLoginState = useResetRecoilState(LoginState)
   const { setCurrentAccount } = useRecoilValue(CurrentAccountState)
   const history = useHistory()
   const [state, setState] = useRecoilState(LoginState)
 
-  useEffect(() => { validate('email') }, [state.email])
-  useEffect(() => { validate('password') }, [state.password])
+  useEffect(() => resetLoginState(), [])
+  useEffect(() => validate('email'), [state.email])
+  useEffect(() => validate('password'), [state.password])
 
   const validate = (field: string): void => {
     const { email, password } = state
