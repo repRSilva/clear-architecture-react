@@ -1,6 +1,6 @@
 {
   "name": "clean-architecture-react",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "React JS using TDD, Clean Architecture and Typescript",
   "author": "Rafael Silva",
   "main": "index.js",
