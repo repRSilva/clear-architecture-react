@@ -1,8 +1,10 @@
 {
   "name": "clean-architecture-react",
-  "version": "2.0.0",
-  "description": "",
+  "version": "3.0.0",
+  "description": "React JS using TDD, Clean Architecture and Typescript",
+  "author": "Rafael Silva",
   "main": "index.js",
+  "license": "ISC",
   "scripts": {
     "start": "node index",
     "dev:base": "webpack-cli serve --config webpack.dev.js",
@@ -19,9 +21,6 @@
     "clearCache": "jest --clearCache",
     "check": "npx npm-check -u -s"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^5.9.0",
     "@testing-library/jest-dom": "^5.12.0",
