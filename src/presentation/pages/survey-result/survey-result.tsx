@@ -33,9 +33,7 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult, saveSurveyResult }: P
       .catch(handleError)
   }
 
-  useEffect(() => {
-    setOnAnswer({ onAnswer })
-  }, [])
+  useEffect(() => setOnAnswer({ onAnswer }), [])
 
   useEffect(() => {
     loadSurveyResult.load()
